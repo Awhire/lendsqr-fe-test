@@ -9,7 +9,7 @@ import RootLayout from "../layouts/RootLayout";
 import ProtectedLayout from "../layouts/ProtectedLayout";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
-import Users from "../pages/Users";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,7 +17,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Login />} />
       <Route element={<ProtectedLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/users" element={<Users />} />
+        
       </Route>
     </Route>
   )
