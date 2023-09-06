@@ -1,7 +1,10 @@
 import { ThemeProvider } from "@mui/material/styles";
 import Routes from "./router/Routes"
-import  "./App.scss"
+import { ToastContainer } from 'react-toastify'
 import theme from "./theme"
+import 'react-toastify/dist/ReactToastify.css'
+import  "./App.scss"
+
 
 
 // const theme = createTheme({
@@ -24,6 +27,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Routes />
+      <ToastContainer />
     </ThemeProvider>
   );
 }

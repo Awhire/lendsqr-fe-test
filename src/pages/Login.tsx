@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import axios from "axios";
+import api from "../api/api";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -21,7 +21,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import CardMedia from "@mui/material/CardMedia";
-
+import { toast } from "react-toastify";
 
 import lendsqrLogo from "../assets/lendsqr-logo.svg";
 import illustration from "../assets/illustration.svg";
@@ -37,9 +37,7 @@ const validationSchema = yup.object({
     .min(5, "Password cannot be less than 5 character"),
 });
 
-
 const Login = () => {
-  
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -54,12 +52,26 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values, args) => {
+      try {
         setLoading(true);
-          console.log("Submited");
-          console.log(values, loading);
-     setTimeout(() => {
-       setLoading(false);
-     }, 5000);
+        const response = await api.signIn(values);
+        if (response.status === 200) {
+          const userData = response.data;
+          const token = response.data.token;
+          localStorage.setItem("userData", userData);
+          localStorage.setItem("userData", token);
+          args.resetForm();
+          toast.success("Login Successfully");
+        } else toast.error("Incorrect Credentials");
+      } catch (error: any) {
+        setLoading(false);
+        if (error.response) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("Something went wrong, please try again");
+        }
+      }
+      setLoading(false);
     },
   });
 
@@ -228,13 +240,17 @@ const Login = () => {
                 sx={{ mt: 3, mb: 2, p: 1.5 }}
               >
                 {loading ? (
-                  <CircularProgress  sx={{color: "white"}} size={20} />
+                  <CircularProgress sx={{ color: "white" }} size={20} />
                 ) : (
-                  <Typography color="text.white"
-                  sx={{
-                    fontSize: "14px",
-                    fontWeight: "500",
-                  }}>LOG IN</Typography>
+                  <Typography
+                    color="text.white"
+                    sx={{
+                      fontSize: "14px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    LOG IN
+                  </Typography>
                 )}
               </Button>
             </Box>
