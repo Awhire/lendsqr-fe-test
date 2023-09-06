@@ -1,38 +1,64 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&display=swap");
+
+@font-face {
+  font-family: "AvenirNext";
+  src: url("./assets/fonts/AvenirNextLTPro-Light.otf") format("woff"),
+    url("./assets/fonts/AvenirNextLTPro-Light.otf") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: "AvenirNext";
+  src: url("./assets/fonts/AvenirNextLTPro-Regular.otf") format("woff"),
+    url("./assets/fonts/AvenirNextLTPro-Regular.otf") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: "AvenirNext";
+  src: url("./assets/fonts/AvenirNextLTPro-Medium.otf") format("woff"),
+    url("./assets/fonts/AvenirNextLTPro-Medium.otf") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@font-face {
+  font-family: "AvenirNext";
+  src: url("./assets/fonts/AvenirNextLTPro-SemiBold.otf") format("woff"),
+    url("./assets/fonts/AvenirNextLTPro-SemiBold.otf") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
-.App-link {
-  color: #61dafb;
+@font-face {
+  font-family: "AvenirNext";
+  src: url("./assets/fonts/AvenirNextLTPro-Bold.otf") format("woff"),
+    url("./assets/fonts/AvenirNextLTPro-Bold.otf") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@font-face {
+  font-family: "AvenirNext";
+  src: url("./assets/fonts/AvenirNextLTPro-ExtraBold.otf") format("woff"),
+    url("./assets/fonts/AvenirNextLTPro-ExtraBold.otf") format("woff");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }
+
+.prevent-select {
+  -moz-user-select: none; /* firefox */
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE*/
+  user-select: none; /* Standard syntax */
+}
+
+

@@ -9,15 +9,18 @@ import RootLayout from "../layouts/RootLayout";
 import ProtectedLayout from "../layouts/ProtectedLayout";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route path="/" element={<Login />} />
+
       <Route element={<ProtectedLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        
+        <Route element={<DashboardLayout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Route>
     </Route>
   )
