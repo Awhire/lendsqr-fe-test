@@ -5,7 +5,7 @@ const white = "#fff";
 const palette = {
   primary: {
     main: "#39CDCC",
-    light: "#39cdcc99",
+    light: "#39cdcc14",
     contrastText: white,
   },
   secondary: {

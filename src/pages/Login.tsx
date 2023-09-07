@@ -1,28 +1,19 @@
 import { useState } from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
+import { useNavigate  } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import api from "../api/api";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
+import { toast } from "react-toastify";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
-import IconButton from "@mui/material/IconButton";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import CardMedia from "@mui/material/CardMedia";
-import { toast } from "react-toastify";
-
+import Button from "@mui/material/Button";
+import api from "../api/api";
 import lendsqrLogo from "../assets/lendsqr-logo.svg";
 import illustration from "../assets/illustration.svg";
 
@@ -38,6 +29,8 @@ const validationSchema = yup.object({
 });
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -58,10 +51,11 @@ const Login = () => {
         if (response.status === 200) {
           const userData = response.data;
           const token = response.data.token;
-          localStorage.setItem("userData", userData);
-          localStorage.setItem("userData", token);
+          localStorage.setItem("user", userData);
+          localStorage.setItem("token", token);
           args.resetForm();
           toast.success("Login Successfully");
+          navigate('/dashboard')
         } else toast.error("Incorrect Credentials");
       } catch (error: any) {
         setLoading(false);
@@ -79,11 +73,10 @@ const Login = () => {
     <Box>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
-        <Grid item xs={false} sm={6} md={6} sx={{ pt: "40px" }}>
+        <Grid item xs={false} sm={false} md={6} className='illustrator-bg-shadow' sx={{ pt: "40px" }}>
           <Box component="div" sx={{ width: "170px", ml: "80px" }}>
             <CardMedia
               component="img"
-              // height="20"
               width="20"
               image={lendsqrLogo}
               alt="lendsqrLogo"
@@ -97,17 +90,14 @@ const Login = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              // height: "100%",
               mt: "60px",
             }}
           >
             <CardMedia
               component="img"
-              // height="194"
-              // width="500"
               image={illustration}
               alt="illustration"
-              sx={{ width: "95%" }}
+              sx={{ width: "93%" }}
             />
           </Box>
         </Grid>
@@ -118,7 +108,7 @@ const Login = () => {
           sm={6}
           md={6}
           component={Paper}
-          elevation={1}
+          elevation={0}
           square
           sx={{ px: "80px" }}
         >

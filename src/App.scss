@@ -61,4 +61,63 @@
   user-select: none; /* Standard syntax */
 }
 
+.illustrator-bg-shadow {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 90%,
+    rgba(250, 250, 250, 1) 100%
+  );
+}
 
+
+::-webkit-scrollbar{
+  background-color:#fff;
+  width: 3px;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #39CDCC;
+}
+
+.scrollableY::-webkit-scrollbar-thumb{
+  background-color: #39CDCC;
+  display: none !important;
+}
+
+// Table font
+.css-wds9v1-MuiTypography-root{
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+
+// .css-gca07e-MuiButtonBase-root-MuiListItemButton-root:hover {
+//   background-color: #39cdcc14 !important;
+// }
+// .css-gca07e-MuiButtonBase-root-MuiListItemButton-root.Mui-selected::before {
+//   content: "";
+//   position: absolute;
+//   left: 0;
+//   width: 10px;
+//   height: 40px;
+//   background-color: #39cdcc;
+// }
+
+
+.css-13lryao-MuiButtonBase-root-MuiListItemButton-root.Mui-selected::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 4px;
+  height: 40px;
+  background-color: #39cdcc;
+}
+
+.css-13lryao-MuiButtonBase-root-MuiListItemButton-root:hover {
+  background-color: #39cdcc14 !important;
+}
+
+
+.css-1df2kmo-MuiButtonBase-root-MuiIconButton-root:hover {
+  background-color: none !important; 
+}

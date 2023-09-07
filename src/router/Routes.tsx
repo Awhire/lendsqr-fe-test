@@ -8,8 +8,10 @@ import {
 import RootLayout from "../layouts/RootLayout";
 import ProtectedLayout from "../layouts/ProtectedLayout";
 import Login from "../pages/Login";
-import Dashboard from "../pages/Dashboard";
 import DashboardLayout from "../layouts/DashboardLayout";
+import Dashboard from "../pages/Dashboard";
+import User from "../pages/Users"
+
 
 
 const router = createBrowserRouter(
@@ -20,6 +22,8 @@ const router = createBrowserRouter(
       <Route element={<ProtectedLayout />}>
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/user" element={<User />} />
+          {/* <Route path="/guarantor" element={<Guarantor />} /> */}
         </Route>
       </Route>
     </Route>

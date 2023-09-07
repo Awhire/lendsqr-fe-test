@@ -2,7 +2,7 @@
 
 const typography = {
     
- fontFamily: ["AvenirNext", "Work Sans", "sans-serif"].join(","),
+ fontFamily: ["Work Sans", "AvenirNext", "sans-serif"].join(","),
   fontWeightLight: 300,
   fontWeightRegular: 400,
   fontWeightMedium: 500,
