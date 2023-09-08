@@ -15,7 +15,7 @@ export default {
 
   getUersData: () => {
     const method = "get";
-    const url = baseURL + "/9342b868-8412-4ad1-9b22-d4dcab825dac";
+    const url = baseURL + "/a16899fe-ed95-4eb4-bd45-8a172b7193be";
 
     return axios({ method, url });
   },

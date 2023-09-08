@@ -11,6 +11,7 @@ import Login from "../pages/Login";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Dashboard from "../pages/Dashboard";
 import User from "../pages/Users"
+import UserDetails from "../pages/UserDetails";
 
 
 
@@ -23,7 +24,7 @@ const router = createBrowserRouter(
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/user" element={<User />} />
-          {/* <Route path="/guarantor" element={<Guarantor />} /> */}
+          <Route path="/user-details" element={<UserDetails />} />
         </Route>
       </Route>
     </Route>

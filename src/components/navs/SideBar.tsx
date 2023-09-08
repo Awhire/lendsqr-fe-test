@@ -6,20 +6,17 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MenuItems from './MenuItems'
+import MenuItems from './MenuItems';
 import { NavLink } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import Box from "@mui/material/Box";
 
 
-const drawerWidth = 240;
+const drawerWidth = 225;
 
 const SideBar = () => {
   const pathname = window.location.pathname
   
-  
-  
-
   return (
     <Box sx={{backgroundColor: "white"}} >
       <CssBaseline />
@@ -44,19 +41,19 @@ const SideBar = () => {
       >
         <List sx={{mt: 8}}>
           {MenuItems.map((item:any, index:any) => (
-            <>
+            <Box key={index}>
             {item.categories && (
-              <Typography sx={{mt: 3, pl: '15px', fontSize: "14px", fontWeight: "600", color: "text.primary" }}>{item.categories}</Typography>
+              <Typography  sx={{mt: 3, pl: '15px', fontSize: "14px", fontWeight: "600", color: "text.primary" }}>{item.categories}</Typography>
             )}
-            <ListItem key={index} disablePadding dense component={NavLink} to={item.path} sx={{ color: "#39CDCC", py: '4px'}}>
-              <ListItemButton selected={item.path === pathname}>
+            <ListItem  disablePadding dense component={NavLink} to={item.path} sx={{ color: "#39CDCC", py: '4px'}}>
+              <ListItemButton  selected={item.path === pathname}>
                 <ListItemIcon sx={{minWidth: '35px'}}>
                   <img src={item.icon} alt={item.name}/>
                 </ListItemIcon>
-                <ListItemText primary={item.name} primaryTypographyProps={{fontSize: '16px', fontWeight: item.path === pathname ? '500': '400',  color: item.path === pathname ? 'secondary': ''}}  sx={{color: 'text.primary'} }/>
+                <ListItemText primary={item.name} primaryTypographyProps={{fontSize: '15px', fontWeight: item.path === pathname ? '500': '400',  color: item.path === pathname ? 'secondary': ''}}  sx={{color: 'text.primary'} }/>
               </ListItemButton>
             </ListItem>
-            </>
+            </Box>
           ))}
         </List>
       </Drawer>

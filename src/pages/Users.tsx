@@ -1,9 +1,9 @@
-import { Box, Typography, Grid, CardContent, Card } from "@mui/material";
-import users from "../assets/users.svg";
-import Table from "../components/Table";
+import { Box, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 import api from "../api/api";
 import { toast } from "react-toastify";
+import Table from "../components/Table";
+import UserCards from "../components/User/UserCards";
 
 const Users = () => {
   const [data, setData] = useState([]);
@@ -33,7 +33,7 @@ const Users = () => {
   }, []);
 
   return (
-    <Box sx={{ color: "text.primary", fontFamily: "Work Sans", p: 3 }}>
+    <Box sx={{ color: "text.primary", fontFamily: "Work Sans", p: 2 }}>
       <Typography
         component="h1"
         fontWeight={500}
@@ -43,106 +43,10 @@ const Users = () => {
         User
       </Typography>
 
-      <Box component="div" mt={5}>
-        <Grid container spacing={3}>
-          <Grid item xs={6} md={3}>
-            <Card sx={{ maxWidth: 240, pl: "10px" }}>
-              <CardContent>
-                <img src={users} alt="" />
-                <Typography
-                  variant="body1"
-                  fontWeight={500}
-                  component="p"
-                  mt={1}
-                  sx={{ fontSize: "14px" }}
-                >
-                  USERS
-                </Typography>
-                <Typography
-                  component="h1"
-                  fontWeight={600}
-                  color="secondary"
-                  sx={{ fontSize: "24px" }}
-                >
-                  2,453
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item sm={6} md={3}>
-            <Card sx={{ maxWidth: 240, pl: "10px" }}>
-              <CardContent>
-                <img src={users} alt="" />
-                <Typography
-                  variant="body1"
-                  fontWeight={500}
-                  component="p"
-                  mt={1}
-                  sx={{ fontSize: "14px" }}
-                >
-                  USERS
-                </Typography>
-                <Typography
-                  component="h1"
-                  fontWeight={600}
-                  color="secondary"
-                  sx={{ fontSize: "24px" }}
-                >
-                  2,453
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={6} md={3}>
-            <Card sx={{ maxWidth: 240, pl: "10px" }}>
-              <CardContent>
-                <img src={users} alt="" />
-                <Typography
-                  variant="body1"
-                  fontWeight={500}
-                  component="p"
-                  mt={1}
-                  sx={{ fontSize: "14px" }}
-                >
-                  USERS
-                </Typography>
-                <Typography
-                  component="h1"
-                  fontWeight={600}
-                  color="secondary"
-                  sx={{ fontSize: "24px" }}
-                >
-                  2,453
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={6} md={3}>
-            <Card sx={{ maxWidth: 240, pl: "10px" }}>
-              <CardContent>
-                <img src={users} alt="" />
-                <Typography
-                  variant="body1"
-                  fontWeight={500}
-                  component="p"
-                  mt={1}
-                  sx={{ fontSize: "14px" }}
-                >
-                  USERS
-                </Typography>
-                <Typography
-                  component="h1"
-                  fontWeight={600}
-                  color="secondary"
-                  sx={{ fontSize: "24px" }}
-                >
-                  2,453
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-
+      <Box component="div" mt={4}>
+        <Box component="div">
+          <UserCards usersDataList={data} />
+        </Box>
         <Box sx={{ mt: 4 }}>
           <Table usersDataList={data} />
         </Box>

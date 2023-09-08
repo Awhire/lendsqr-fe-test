@@ -51,7 +51,7 @@ const Login = () => {
         if (response.status === 200) {
           const userData = response.data;
           const token = response.data.token;
-          localStorage.setItem("user", userData);
+          localStorage.setItem("user", JSON.stringify(userData));
           localStorage.setItem("token", token);
           args.resetForm();
           toast.success("Login Successfully");

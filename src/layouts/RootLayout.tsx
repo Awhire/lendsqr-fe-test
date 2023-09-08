@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 
 const RootLayout = () => {
   return (
-    <main>
+    <main style={{overflowX: 'hidden'}}>
         <Outlet />
     </main>
   )

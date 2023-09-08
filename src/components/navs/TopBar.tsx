@@ -1,20 +1,43 @@
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import lendsqr from "../../assets/lendsqr-logo.svg";
-import notis from "../../assets/notis.svg"
-import avatar from "../../assets/avatar.svg"
-import dropdown from "../../assets/dropdown.svg"
+import notis from "../../assets/notis.svg";
+import avatar from "../../assets/avatar.svg";
+import dropdown from "../../assets/dropdown.svg";
 import Grid from "@mui/material/Grid";
-
+import { Avatar } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 
 const TopBar = () => {
+  const [profileImg, setProfileImg] = useState("");
+  const [userFullName, setUserFullName] = useState("");
+  const [userFirstName, setUserFirstName] = useState("");
+  const user = localStorage.getItem("user");
+
+  useEffect(() => {
+    if (user !== null) {
+      const userObj = JSON.parse(user);
+      const profileImg = userObj.profilePicUrl;
+      const fullName = userObj.fullName;
+      setProfileImg(profileImg);
+      setUserFullName(fullName);
+      setUserFirstName(fullName.split(' ')[0]);
+    }
+  }, [user]);
+
+  function stringAvatar(name: string) {
+    return {
+      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    };
+  }
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -24,7 +47,7 @@ const TopBar = () => {
           zIndex: (theme) => theme.zIndex.drawer + 1,
           backgroundColor: "text.white",
           height: "70px",
-          borderBottom: "1px light black"
+          borderBottom: "1px light black",
         }}
         elevation={1}
       >
@@ -80,16 +103,31 @@ const TopBar = () => {
                     <SearchIcon />
                   </IconButton>
                 </Paper>
-                
-                
+
                 <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
                   <Typography sx={{ textDecoration: "underline" }}>
                     Doc
                   </Typography>
                   <img src={notis} alt="notification" />
-                  <Box component="div" sx={{display: "flex", alignItems: "center", gap: "4px"}}>
-                    <img src={avatar} alt="" width="36px" />
-                    <Typography component="p">Awhire</Typography>
+                  <Box
+                    component="div"
+                    sx={{ display: "flex", alignItems: "center", gap: "4px" }}
+                  >
+                    <Box component="div">
+                      {profileImg ? (
+                        <Avatar
+                          src={profileImg}
+                          sx={{ width: 32, height: 32 }}
+                        />
+                      ) : (
+                        <Avatar
+                          sx={{ width: 32, height: 32, bgcolor: 'primary.main' }}
+                          {...stringAvatar(userFullName)}
+                        />
+                      )}
+                    </Box>
+
+                    <Typography component="p">{userFirstName}</Typography>
                     <img src={dropdown} alt="" />
                   </Box>
                 </Box>
