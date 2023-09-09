@@ -4,7 +4,6 @@ import back from "../assets/back.svg";
 import ButtonMui from "../components/ButtonMui";
 import UserDetailsProfile from "../assets/userDetailsProfile.svg";
 import Ratings from "../components/Ratings"
-import UserDetailsNav from "../components/Navs/UserDetailsNav";
 import GeneralDetails from "./GeneralDetails";
 
 
@@ -15,10 +14,10 @@ const UserDetails = () => {
   const userBalance = balance.toLocaleString();
 
   const BackToDashboard = () => {
-    navigate("/user");
+    navigate(-1);
   };
   return (
-    <Box component="div" color="text.primary" sx={{ p: 2, mt: 2, mb: 10 }}>
+    <Box component="div" >
       <Box
         component="div"
         sx={{
@@ -128,7 +127,7 @@ const UserDetails = () => {
 
         <Box component="div">
           <Box component="div">
-            <UserDetailsNav />
+            {/* <UserDetailsNav /> */}
           </Box>
           <Box component="div" className="md:hidden">
             {/* <ListBoxUserDetails /> */}

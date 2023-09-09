@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import { Typography, IconButton } from "@mui/material";
+import {
+  Typography,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TablePagination,
+  TableHead,
+  TableCell,
+  TableContainer,
+  TableRow,
+} from "@mui/material";
+
+import TableDropDown from "./TableDropDown";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 type Column = {
   id:
@@ -58,6 +62,7 @@ type Data = {
   phone: string;
   createdAt: string;
   status: string;
+  _id: string;
 };
 
 function createData(
@@ -66,9 +71,10 @@ function createData(
   email: string,
   phone: string,
   createdAt: string,
-  status: string
+  status: string,
+  _id: string
 ): Data {
-  return { organizationName, userName, email, phone, createdAt, status };
+  return { organizationName, userName, email, phone, createdAt, status, _id };
 }
 
 const makeStyles = (status: string) => {
@@ -104,8 +110,11 @@ const makeStyles = (status: string) => {
   }
 };
 
-const StickyHeadTable = (usersDataList: any) => {
+const TableData = (usersDataList: any) => {
   const data = usersDataList.usersDataList;
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const rows = data.map((item: any) =>
     createData(
@@ -114,12 +123,10 @@ const StickyHeadTable = (usersDataList: any) => {
       item.email,
       item.phone,
       item.createdAt,
-      item.status
+      item.status,
+      item._id
     )
   );
-
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -133,7 +140,7 @@ const StickyHeadTable = (usersDataList: any) => {
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <Paper className="card-shadow" sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 500, pl: 2 }}>
         <Table stickyHeader>
           <TableHead>
@@ -177,36 +184,49 @@ const StickyHeadTable = (usersDataList: any) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row: any, index: number) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                    <>
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell
-                            key={column.id}
-                            align="left"
-                            sx={{ p: "12px" }}
-                          >
-                            {column.format && typeof value === "number" ? (
-                              column.format(value)
-                            ) : (
-                              <Typography
-                                fontWeight={400}
-                                sx={{ fontSize: "12px" }}
-                                style={makeStyles(row[column.id])}
-                              >
-                                {value}
-                              </Typography>
-                            )}
-                          </TableCell>
-                        );
-                      })}
-                      <TableCell align="left" sx={{ p: "1px" }}>
-                      <IconButton>
-                        <MoreVertIcon />
-                        </IconButton>
-                      </TableCell>
-                    </>
+                  <TableRow hover key={index}>
+                    <TableCell sx={{ p: "12px" }}>
+                      <Typography fontWeight={400} sx={{ fontSize: "12px" }}>
+                        {row.organizationName}
+                      </Typography>
+                    </TableCell>
+
+                    <TableCell sx={{ p: "12px" }}>
+                      <Typography fontWeight={400} sx={{ fontSize: "12px" }}>
+                        {row.userName}
+                      </Typography>
+                    </TableCell>
+
+                    <TableCell sx={{ p: "12px" }}>
+                      <Typography fontWeight={400} sx={{ fontSize: "12px" }}>
+                        {row.email}
+                      </Typography>
+                    </TableCell>
+
+                    <TableCell sx={{ p: "12px" }}>
+                      <Typography fontWeight={400} sx={{ fontSize: "12px" }}>
+                        {row.phone}
+                      </Typography>
+                    </TableCell>
+
+                    <TableCell sx={{ p: "12px" }}>
+                      <Typography fontWeight={400} sx={{ fontSize: "12px" }}>
+                        {row.createdAt}
+                      </Typography>
+                    </TableCell>
+
+                    <TableCell sx={{ p: "12px" }}>
+                      <Typography
+                        fontWeight={400}
+                        sx={{ fontSize: "12px" }}
+                        style={makeStyles(row.status)}
+                      >
+                        {row.status}
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ p: "1px" }}>
+                      <TableDropDown rowData={row} />
+                    </TableCell>
                   </TableRow>
                 );
               })}
@@ -226,4 +246,4 @@ const StickyHeadTable = (usersDataList: any) => {
   );
 };
 
-export default StickyHeadTable;
+export default TableData;

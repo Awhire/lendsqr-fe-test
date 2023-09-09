@@ -1,6 +1,7 @@
-import { Outlet } from "react-router-dom"
+import { Outlet} from "react-router-dom"
 
 const RootLayout = () => {
+
   return (
     <main style={{overflowX: 'hidden'}}>
         <Outlet />

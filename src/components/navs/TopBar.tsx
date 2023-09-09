@@ -33,8 +33,9 @@ const TopBar = () => {
   }, [user]);
 
   function stringAvatar(name: string) {
+    const value = name ? name : ' '
     return {
-      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+      children: `${value.split(" ")[0][0]}${value.split(" ")[1][0]}`,
     };
   }
 
@@ -43,13 +44,13 @@ const TopBar = () => {
       <CssBaseline />
       <AppBar
         position="fixed"
+        className="elevation2"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
           backgroundColor: "text.white",
           height: "70px",
           borderBottom: "1px light black",
         }}
-        elevation={1}
       >
         <Toolbar>
           <Grid container spacing={2} sx={{ color: "text.secondary" }}>

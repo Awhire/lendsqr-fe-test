@@ -1,18 +1,20 @@
 import { useState } from "react";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { toast } from "react-toastify";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import InputAdornment from "@mui/material/InputAdornment";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import CircularProgress from "@mui/material/CircularProgress";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
+import {
+  Paper,
+  Box,
+  Grid,
+  Typography,
+  CssBaseline,
+  TextField,
+  InputAdornment,
+  Button,
+  CircularProgress,
+  CardMedia,
+} from "@mui/material";
 import api from "../api/api";
 import lendsqrLogo from "../assets/lendsqr-logo.svg";
 import illustration from "../assets/illustration.svg";
@@ -55,7 +57,7 @@ const Login = () => {
           localStorage.setItem("token", token);
           args.resetForm();
           toast.success("Login Successfully");
-          navigate('/dashboard')
+          navigate("/user");
         } else toast.error("Incorrect Credentials");
       } catch (error: any) {
         setLoading(false);
@@ -64,8 +66,7 @@ const Login = () => {
         } else {
           toast.error("Something went wrong, please try again");
         }
-      }
-      setLoading(false);
+      };
     },
   });
 
@@ -73,7 +74,14 @@ const Login = () => {
     <Box>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
-        <Grid item xs={false} sm={false} md={6} className='illustrator-bg-shadow' sx={{ pt: "40px" }}>
+        <Grid
+          item
+          xs={false}
+          sm={false}
+          md={6}
+          className="illustrator-bg-shadow"
+          sx={{ pt: "40px" }}
+        >
           <Box component="div" sx={{ width: "170px", ml: "80px" }}>
             <CardMedia
               component="img"

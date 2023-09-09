@@ -1,13 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
-import api from "../api/api";
 import { toast } from "react-toastify";
-import Table from "../components/Table";
-import UserCards from "../components/User/UserCards";
+import TableData from "../components/User/TableData";
+import CardData from "../components/User/CardData";
+import Spinner from "../components/Spinner";
+import api from "../api/api";
 
 const Users = () => {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
@@ -16,9 +17,9 @@ const Users = () => {
         const response = await api.getUersData();
         if (response.status === 200) {
           const data = response.data;
-          console.log("data", data);
-
           setData(data);
+          localStorage.setItem("tableData", JSON.stringify(data));
+          setLoading(false);
         } else toast.error("Error in Getting Data");
       } catch (error: any) {
         setLoading(false);
@@ -29,11 +30,17 @@ const Users = () => {
         }
       }
     };
-    getData();
+
+    
+    const localTableData: any = localStorage.getItem("tableData");
+    if (localTableData) {
+      setData(JSON.parse(localTableData));
+      setLoading(false);
+    } else getData();
   }, []);
 
   return (
-    <Box sx={{ color: "text.primary", fontFamily: "Work Sans", p: 2 }}>
+    <Box >
       <Typography
         component="h1"
         fontWeight={500}
@@ -43,14 +50,18 @@ const Users = () => {
         User
       </Typography>
 
-      <Box component="div" mt={4}>
-        <Box component="div">
-          <UserCards usersDataList={data} />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Box component="div" mt={4}>
+          <Box component="div">
+            <CardData usersDataList={data} />
+          </Box>
+          <Box sx={{ mt: 4 }}>
+            <TableData usersDataList={data} />
+          </Box>
         </Box>
-        <Box sx={{ mt: 4 }}>
-          <Table usersDataList={data} />
-        </Box>
-      </Box>
+      )}
     </Box>
   );
 };
