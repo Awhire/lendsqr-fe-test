@@ -1,16 +1,29 @@
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { CircularProgress, Typography } from "@mui/material";
 
-
-
-const ButtonMui = ({ title, color } : any) => {
+const ButtonMui = ({ title, color, loading, onClick }: any) => {
   return (
-    <Stack direction="row" spacing={4}>
-      <Button variant="outlined" color={color} size="small" style={{paddingLeft: "16px", paddingRight: "16px", borderWidth: "2px", fontWeight: "600", borderRadius: '8px'}}>
-        {title}
+    <Box component="div">
+      <Button
+        variant="outlined"
+        color={color}
+        size="small"
+        onClick={onClick}
+        sx={{
+          p: "16px",
+          py: "8px",
+          borderWidth: "1.5px",
+          borderRadius: "8px",
+        }}
+      >
+        {loading ? <CircularProgress color={color} size={13} /> : null}
+        <Typography pl={1} fontSize={13} fontWeight={600}>
+          {title}
+        </Typography>
       </Button>
-    </Stack>
+    </Box>
   );
-}
+};
 
-export default ButtonMui
+export default ButtonMui;

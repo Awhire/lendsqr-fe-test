@@ -1,35 +1,80 @@
-import { Box, Divider, Typography } from "@mui/material";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import back from "../assets/back.svg";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import back from "../assets/user/back.svg";
 import ButtonMui from "../components/ButtonMui";
-import UserDetailsProfile from "../assets/userDetailsProfile.svg";
-import Ratings from "../components/Ratings"
-import GeneralDetails from "./GeneralDetails";
 
-
+import UserInfo from "../components/User/Details/UserInfo";
+import GeneralDetails from "../components/User/Details/GeneralDetails";
+import api from "../api/api";
 
 const UserDetails = () => {
+  const { state } = useLocation();
   const navigate = useNavigate();
-  const balance = 2000000;
-  const userBalance = balance.toLocaleString();
+
+  const [activateLoading, setActivateLoading] = useState(false);
+  const [blackListLoading, setBlackListLoading] = useState(false);
+
+  const activate = async () => {
+    try {
+      setActivateLoading(true);
+      const response = await api.activateUser(state._id);
+      if (response.status === 200) {
+        const message = response.data.message;
+        toast.success(message);
+        setActivateLoading(false);
+      } else toast.error("Error in Activating User");
+    } catch (error: any) {
+      setActivateLoading(false);
+      if (error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Something went wrong, please try again");
+      }
+    }
+  };
+
+  const blacklist = async () => {
+    try {
+      setBlackListLoading(true);
+      const response = await api.blaclListUser(state._id);
+      if (response.status === 200) {
+        const message = response.data.message;
+        toast.success(message);
+        setBlackListLoading(false);
+      } else toast.error("Error in Blacklisting User");
+    } catch (error: any) {
+      setBlackListLoading(false);
+      if (error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Something went wrong, please try again");
+      }
+    }
+  };
 
   const BackToDashboard = () => {
     navigate(-1);
   };
   return (
-    <Box component="div" >
+    <Box component="div">
       <Box
         component="div"
         sx={{
           display: "flex",
-          gap: 4,
+          gap: 2,
           alignItems: "center",
           cursor: "pointer",
         }}
         onClick={BackToDashboard}
       >
         <img src={back} alt="back-arrow" />
-        <Typography fontWeight={400}>Back to Dashboard</Typography>
+        <Typography fontWeight={400} fontSize={16}>
+          Back to Dashboard
+        </Typography>
       </Box>
 
       <Box
@@ -53,95 +98,25 @@ const UserDetails = () => {
             alignItems: "center",
           }}
         >
-          <ButtonMui title="BLACKLIST USER" color="error" />
-          <ButtonMui title="ACTIVATE USER" color="success" />
+          <ButtonMui
+            title="BLACKLIST USER"
+            color="error"
+            loading={blackListLoading}
+            onClick={blacklist}
+          />
+          <ButtonMui
+            title="ACTIVATE USER"
+            color="primary"
+            loading={activateLoading}
+            onClick={activate}
+          />
         </Box>
       </Box>
 
-      <Box
-        sx={{
-          backgroundColor: "text.white",
-          height: "180px",
-          mt: 7,
-          borderRadius: "10px",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            p: 8,
-            pt: 4,
-            alignItems: "center",
-          }}
-        >
-          <Box sx={{ display: "flex" }}>
-            <Box
-              style={{
-                background: "rgba(33, 63, 125, 0.1)",
-                padding: "24px",
-                borderRadius: "100%",
-              }}
-            >
-              <img src={UserDetailsProfile} alt="" width="30px" />
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                pl: 5,
-                spaceY: 2,
-              }}
-            >
-              <Typography
-                component="h1"
-                fontWeight={500}
-                sx={{ color: "text.secondary", fontSize: "18px", mb: 1 }}
-              >
-                Grace Effiom
-              </Typography>
-              <Typography
-                component="p"
-                sx={{ color: "text.primary", fontSize: "12px" }}
-              >
-                LSQFf587g90
-              </Typography>
-            </Box>
-          </Box>
-
-          <Divider orientation="vertical" flexItem  sx={{height: "80px", ml: 5}} />
-
-          <Box component="div" sx={{display: "flex", flexDirection: "column",  justifyContent: "center", alignItems: "center", spaceY: 2}}>
-            <Typography fontWeight={500} sx={{fontSize: "14px", color: "text.primary", mb: 1}} >User’s Tier</Typography>
-            <Ratings />
-          </Box>
-
-          <Divider orientation="vertical" flexItem  sx={{height: "80px", ml: 5}} />
-
-
-          <Box sx={{color: "text.secondary", pl: 5, flexDirection: "column", justifyContent: "center" }}>
-            <Typography component="p" fontWeight={500} sx={{fontSize: "20px", mb: 1}}> &#8358;{userBalance} </Typography>
-            <Typography component="p" sx={{fontSize: "12px"}}>9912345678/Providus Bank</Typography>
-          </Box>
-
-        <Box component="div">
-          <Box component="div">
-            {/* <UserDetailsNav /> */}
-          </Box>
-          <Box component="div" className="md:hidden">
-            {/* <ListBoxUserDetails /> */}
-          </Box>
-        </Box>
-        </Box>
-
+      <UserInfo />
+      <Box sx={{ backgroundColor: "text.white", mt: 3, borderRadius: "4px" }}>
+        <GeneralDetails />
       </Box>
-
-      <Box sx={{backgroundColor: "text.white", mt: 5, borderRadius: "20px"}}>
-            <GeneralDetails />
-        
-      </Box>
-
     </Box>
   );
 };

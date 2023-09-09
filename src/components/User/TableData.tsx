@@ -11,9 +11,14 @@ import {
   TableContainer,
   TableRow,
 } from "@mui/material";
+import { format } from 'date-fns'
 
 import TableDropDown from "./TableDropDown";
 import FilterListIcon from "@mui/icons-material/FilterList";
+
+const formatDate = (date: any) => {
+  return format(new Date(date), 'MMM dd, yyyy HH:mm aa')
+};
 
 type Column = {
   id:
@@ -25,7 +30,6 @@ type Column = {
     | "status";
   label: string;
   minWidth?: number;
-  format?: (value: number) => string;
 };
 
 const columns: readonly Column[] = [
@@ -63,6 +67,10 @@ type Data = {
   createdAt: string;
   status: string;
   _id: string;
+  fullName: string
+  UserTier: number;
+  balance: string;
+  bankDetails: any
 };
 
 function createData(
@@ -72,9 +80,14 @@ function createData(
   phone: string,
   createdAt: string,
   status: string,
-  _id: string
+  _id: string,
+  fullName: string,
+  UserTier: number,
+  balance: string,
+  bankDetails: any
+
 ): Data {
-  return { organizationName, userName, email, phone, createdAt, status, _id };
+  return { organizationName, userName, email, phone, createdAt, status, _id, fullName, UserTier, balance, bankDetails };
 }
 
 const makeStyles = (status: string) => {
@@ -124,7 +137,11 @@ const TableData = (usersDataList: any) => {
       item.phone,
       item.createdAt,
       item.status,
-      item._id
+      item._id,
+      item.fullName,
+      item.UserTier,
+      item.balance,
+      item.bankDetails
     )
   );
 
@@ -211,7 +228,7 @@ const TableData = (usersDataList: any) => {
 
                     <TableCell sx={{ p: "12px" }}>
                       <Typography fontWeight={400} sx={{ fontSize: "12px" }}>
-                        {row.createdAt}
+                        {formatDate(row.createdAt)}
                       </Typography>
                     </TableCell>
 

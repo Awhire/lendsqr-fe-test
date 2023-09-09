@@ -39,7 +39,8 @@ const palette = {
   text: {
     primary: "#545F7D",
     secondary: "#213F7D",
-    white: '#FFFFFF'
+    white: '#FFFFFF',
+    gray: "#b0bec5",
   },
   action: {
     disabled: "#FFFFFF",

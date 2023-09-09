@@ -9,8 +9,8 @@ import eyeIcon from "../../assets/user/eyeIcon.svg";
 import bloackListIcon from "../../assets/user/bloackListIcon.svg";
 import activateIcon from "../../assets/user/activateIcon.svg";
 
-const TableDropDown = (rowData: any) => {
-  const row = rowData.rowData;
+const TableDropDown = ({rowData}: any) => {
+  const row = rowData;
 
   const navigate = useNavigate();
   const [activateLoading, setActivateLoading] = useState(false);
@@ -35,7 +35,6 @@ const TableDropDown = (rowData: any) => {
         const response = await api.activateUser(userID);
         if (response.status === 200) {
           const message = response.data.message;
-          console.log(response)
           toast.success(message);
           setActivateLoading(false);
         } else toast.error("Error in Activating User");
@@ -55,7 +54,6 @@ const TableDropDown = (rowData: any) => {
         const response = await api.blaclListUser(userID);
         if (response.status === 200) {
           const message = response.data.message;
-          console.log(response)
           toast.success(message);
           setBlackListLoading(false);
         } else toast.error("Error in Blacklisting User");
@@ -70,7 +68,8 @@ const TableDropDown = (rowData: any) => {
     }
 
     else {
-      navigate("details");
+      const params = selectedRowData
+      navigate("details", { state: params });
     }
 
     handleMenuClose();

@@ -11,7 +11,7 @@ import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import User from "../pages/Users";
 import UserDetails from "../pages/UserDetails";
-import GeneralDetails from "../pages/GeneralDetails";
+import GeneralDetails from "../components/User/Details/GeneralDetails";
 
 //layouts
 import RootLayout from "../layouts/RootLayout";

@@ -1,25 +1,122 @@
 import { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import AppBar from "@mui/material/AppBar";
-import CssBaseline from "@mui/material/CssBaseline";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import lendsqr from "../../assets/lendsqr-logo.svg";
-import notis from "../../assets/notis.svg";
-import avatar from "../../assets/avatar.svg";
-import dropdown from "../../assets/dropdown.svg";
-import Grid from "@mui/material/Grid";
-import { Avatar } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
+import {
+  Typography,
+  Toolbar,
+  CssBaseline,
+  AppBar,
+  Box,
+  Grid,
+  Avatar,
+  Paper,
+  InputBase,
+  IconButton,
+  Popover,
+  Divider,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import SearchIcon from "@mui/icons-material/Search";
 
+import lendsqr from "../../assets/lendsqr-logo.svg";
+import notis from "../../assets/notis.svg";
+import dropdown from "../../assets/dropdown.svg";
+
+import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
+import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+
 const TopBar = () => {
+  const navigate = useNavigate();
+
   const [profileImg, setProfileImg] = useState("");
   const [userFullName, setUserFullName] = useState("");
   const [userFirstName, setUserFirstName] = useState("");
+  const [anchorEl, setAnchorEl] = useState(null);
+
   const user = localStorage.getItem("user");
+
+  const handleMenuOpen = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+    handleMenuClose();
+    toast.success("Successfully logged out!");
+  };
+
+  const menuContent = (
+    <Box sx={{ py: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 1,
+          pl: 2,
+          pr: 6,
+          py: 0.5,
+          mb: 0.5,
+          "&:hover": {
+            backgroundColor: "primary.light",
+            cursor: "pointer",
+          },
+        }}
+        onClick={handleMenuClose}
+      >
+        <Person2OutlinedIcon fontSize="small" sx={{ color: "primary.main" }} />
+        <Typography fontWeight={400} fontSize="14px">
+          Profile
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 1,
+          pl: 2,
+          pr: 6,
+          py: 0.5,
+          mb: 0.5,
+          "&:hover": {
+            backgroundColor: "primary.light",
+            cursor: "pointer",
+          },
+        }}
+        onClick={handleMenuClose}
+      >
+        <SettingsSuggestOutlinedIcon
+          fontSize="small"
+          sx={{ color: "primary.main" }}
+        />
+        <Typography fontWeight={400} fontSize="14px">
+          Settings
+        </Typography>
+      </Box>
+      <Divider light sx={{ my: 0.5 }} />
+      <Box
+        sx={{
+          display: "flex",
+          gap: 1,
+          pl: 2,
+          pr: 6,
+          py: 0.5,
+          "&:hover": {
+            backgroundColor: "primary.light",
+            cursor: "pointer",
+          },
+        }}
+        onClick={logout}
+      >
+        <LogoutOutlinedIcon fontSize="small" sx={{ color: "primary.main" }} />
+        <Typography fontWeight={400} fontSize="14px">
+          Log out
+        </Typography>
+      </Box>
+    </Box>
+  );
 
   useEffect(() => {
     if (user !== null) {
@@ -28,12 +125,12 @@ const TopBar = () => {
       const fullName = userObj.fullName;
       setProfileImg(profileImg);
       setUserFullName(fullName);
-      setUserFirstName(fullName.split(' ')[0]);
+      setUserFirstName(fullName.split(" ")[0]);
     }
   }, [user]);
 
   function stringAvatar(name: string) {
-    const value = name ? name : ' '
+    const value = name ? name : " ";
     return {
       children: `${value.split(" ")[0][0]}${value.split(" ")[1][0]}`,
     };
@@ -79,7 +176,7 @@ const TopBar = () => {
                     height: "40px",
                     borderRadius: "8px",
                     border: "1px solid ",
-                    borderColor: "secondary",
+                    borderColor: "text.gray",
                   }}
                 >
                   <InputBase
@@ -106,12 +203,21 @@ const TopBar = () => {
                 </Paper>
 
                 <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
-                  <Typography sx={{ textDecoration: "underline" }}>
-                    Doc
-                  </Typography>
-                  <img src={notis} alt="notification" />
+                  <IconButton>
+                    <Typography
+                      className="prevent-select"
+                      color={"secondary"}
+                      sx={{ textDecoration: "underline" }}
+                    >
+                      Doc
+                    </Typography>
+                  </IconButton>
+                  <IconButton>
+                    <img src={notis} alt="notification" />
+                  </IconButton>
                   <Box
                     component="div"
+                    onClick={(e) => handleMenuOpen(e)}
                     sx={{ display: "flex", alignItems: "center", gap: "4px" }}
                   >
                     <Box component="div">
@@ -122,15 +228,45 @@ const TopBar = () => {
                         />
                       ) : (
                         <Avatar
-                          sx={{ width: 32, height: 32, bgcolor: 'primary.main' }}
+                          sx={{
+                            width: 32,
+                            height: 32,
+                            bgcolor: "primary.main",
+                          }}
                           {...stringAvatar(userFullName)}
                         />
                       )}
                     </Box>
 
-                    <Typography component="p">{userFirstName}</Typography>
-                    <img src={dropdown} alt="" />
+                    <Typography
+                      component="p"
+                      pl={0.5}
+                      fontWeight={500}
+                      className="prevent-select"
+                    >
+                      {userFirstName}
+                    </Typography>
+                    <IconButton>
+                      <img src={dropdown} alt="icon" />
+                    </IconButton>
                   </Box>
+                  <Popover
+                    id={Boolean(anchorEl) ? "simple-popover" : undefined}
+                    open={Boolean(anchorEl)}
+                    anchorEl={anchorEl}
+                    onClose={handleMenuClose}
+                    elevation={1}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "right",
+                    }}
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                  >
+                    {menuContent}
+                  </Popover>
                 </Box>
               </Box>
             </Grid>
