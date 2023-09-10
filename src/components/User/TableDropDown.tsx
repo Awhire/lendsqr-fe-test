@@ -139,7 +139,7 @@ const TableDropDown = ({rowData}: any) => {
   return (
     <>
       <IconButton
-        aria-owns={Boolean(anchorEl) ? "simple-popover" : undefined}
+        aria-labelledby={Boolean(anchorEl) ? "simple-popover" : undefined}
         aria-label="more"
         aria-controls="menu"
         aria-haspopup="true"
