@@ -5,13 +5,15 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-
 // pages
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import User from "../pages/Users";
 import UserDetails from "../pages/UserDetails";
-import GeneralDetails from "../components/User/Details/GeneralDetails";
+import NotFound from "../pages/NotFound";
+import Guarantor from "../pages/Guarantor";
+import Loans from "../pages/Loans";
+
 
 //layouts
 import RootLayout from "../layouts/RootLayout";
@@ -29,6 +31,8 @@ const router = createBrowserRouter(
         {/* dashboard layout for views with sidebar and topbar */}
         <Route element={<DashboardLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="guarantor" element={<Guarantor />} />
+          <Route path="loans" element={<Loans />} />
 
           <Route path="user" element={<NestedLayout />}>
             {/*  nested routers of user,  every route here will route /user/*   */}
@@ -37,6 +41,9 @@ const router = createBrowserRouter(
           </Route>
         </Route>
       </Route>
+
+      {/* 404 Not found */}
+      <Route path="*" element={<NotFound />} />
     </Route>
   )
 );

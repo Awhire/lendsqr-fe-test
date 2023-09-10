@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -32,6 +32,7 @@ const validationSchema = yup.object({
 
 const Login = () => {
   const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem("user");
 
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -66,9 +67,16 @@ const Login = () => {
         } else {
           toast.error("Something went wrong, please try again");
         }
-      };
+      }
     },
   });
+
+  useEffect(() => {
+    //check if user is already login and rediect to dashboard
+    if (isLoggedIn) {
+      navigate("/user");
+    }
+  }, []);
 
   return (
     <Box>
