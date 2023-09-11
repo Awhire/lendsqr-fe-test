@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import SideBar from "../../../src/components/Navs/SideBar";
-import TopBar from "../../../src/components/Navs/TopBar";
+import SideBar from "../NavigationBar/SideBar";
+import TopBar from "../NavigationBar/TopBar";
 import {Box, Container} from "@mui/material";
 
 const DashboardLayout = () => {
