@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useStateValue } from "../context/Context";
+import { useStateValue } from "../contexts/Context";
 
 
 import back from "../assets/user/back.svg";
@@ -16,10 +16,10 @@ import api from "../api/api";
 
 
 const UserDetails = () => {
-  const { value } = useStateValue();
+  const { tabNav } = useStateValue();
 
   
-    const selectedTabIndex = value;
+    const selectedTabIndex = tabNav;
   
 
   const { state } = useLocation();

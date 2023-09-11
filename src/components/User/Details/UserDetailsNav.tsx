@@ -1,18 +1,18 @@
 import { Box } from '@mui/material'
 import { useState } from 'react'
-import { useStateValue } from '../../../context/Context';
+import { useStateValue } from '../../../contexts/Context';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 
 
 const UserDetailsNav = () => {
-  const { updateValue } = useStateValue();
+  const { updateTabNav } = useStateValue();
 
   const [selected, setSelected] = useState(0)
 
   const handleChange = (event: any, index: number) => {
     setSelected(index);
-    updateValue(index);
+    updateTabNav(index);
   };
 
 

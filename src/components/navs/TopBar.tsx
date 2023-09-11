@@ -12,32 +12,51 @@ import {
   IconButton,
   Popover,
   Divider,
+  CardMedia,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
-
 import SearchIcon from "@mui/icons-material/Search";
+
+import { useStateValue } from "../../contexts/Context";
 
 import lendsqr from "../../assets/lendsqr-logo.svg";
 import notis from "../../assets/notis.svg";
 import dropdown from "../../assets/dropdown.svg";
-
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
+const styles = (theme: any) => ({
+  logoRes: {
+    w: 10,
+    [theme.breakpoints.down("sm")]: {
+      w: 5,
+    },
+  },
+});
+
 const TopBar = () => {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const { mobileSideBarNav, updateMobileSideBarNav } = useStateValue();
 
   const [profileImg, setProfileImg] = useState("");
   const [userFullName, setUserFullName] = useState("");
   const [userFirstName, setUserFirstName] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const classes = styles(theme);
   const user = localStorage.getItem("user");
 
   const handleMenuOpen = (event: any) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleDrawerToggle = () => {
+    updateMobileSideBarNav(!mobileSideBarNav);
   };
 
   const handleMenuClose = () => {
@@ -137,7 +156,7 @@ const TopBar = () => {
   }
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{}}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -150,27 +169,41 @@ const TopBar = () => {
         }}
       >
         <Toolbar>
-          <Grid container spacing={2} sx={{ color: "text.secondary" }}>
-            <Grid item md={2} sx={{ mt: 1 }}>
-              <img src={lendsqr} alt="lendsqrLogo" width="120px" />
-            </Grid>
-
-            <Grid item md={10}>
-              <Box
-                sx={{
-                  pl: 6,
-                  pr: 3,
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
+          <Box
+            component="div"
+            sx={{
+              color: "text.secondary",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+            }}
+          >
+            <Box component="div" sx={{ mt: 1, display: "flex", alignItems: "center"}}>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { md: "none" } }}
               >
-                <Paper
+                <MenuIcon />
+              </IconButton>
+              <CardMedia
+                component="img"
+                image={lendsqr}
+                alt="logo"
+                sx={{ width: { xs: "100px", md: "120px" } }}
+              />
+            </Box>
+
+            <Box>
+            <Paper
                   component="form"
                   elevation={0}
                   sx={{
                     p: "2px 4px",
-                    display: "flex",
+                    display: { xs: "none", md: "flex" },
                     alignItems: "center",
                     width: 400,
                     height: "40px",
@@ -201,9 +234,22 @@ const TopBar = () => {
                     <SearchIcon />
                   </IconButton>
                 </Paper>
+                </Box>
+
+            <Box component="div">
+              <Box
+                sx={{
+                  pl: 6,
+                  pr: 3,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                
 
                 <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
-                  <IconButton>
+                  <IconButton sx={{ display: { sm: "none", xs: "none" } }}>
                     <Typography
                       className="prevent-select"
                       color={"secondary"}
@@ -269,8 +315,8 @@ const TopBar = () => {
                   </Popover>
                 </Box>
               </Box>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>

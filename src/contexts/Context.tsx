@@ -1,8 +1,10 @@
 import { ReactNode, createContext, useContext, useState } from "react";
 
 type ContextValue = {
-  value: number;
-  updateValue: (newValue: number) => void;
+  tabNav: number;
+  updateTabNav: (newValue: number) => void;
+  mobileSideBarNav: boolean;
+  updateMobileSideBarNav: (newValue: boolean) => void;
 };
 
 const StateContext = createContext<ContextValue | undefined>(undefined);
@@ -12,14 +14,19 @@ type StateProviderProps = {
 };
 
 export function StateProvider({ children }: StateProviderProps) {
-  const [value, setValue] = useState<number>(0);
+  const [tabNav, setTabNav] = useState<number>(0);
+  const [mobileSideBarNav, setMobileSideBarNav] = useState<boolean>(false);
 
-  const updateValue = (newValue: number) => {
-    setValue(newValue);
+  const updateTabNav = (newValue: number) => {
+    setTabNav(newValue);
+  };
+
+  const updateMobileSideBarNav = (newValue: boolean) => {
+    setMobileSideBarNav(newValue);
   };
 
   return (
-    <StateContext.Provider value={{ value, updateValue }}>
+    <StateContext.Provider value={{ tabNav, updateTabNav, mobileSideBarNav, updateMobileSideBarNav }}>
       {children}
     </StateContext.Provider>
   );

@@ -1,15 +1,21 @@
-import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
-import AppBar from "@mui/material/AppBar";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MenuItems from "./MenuItems";
 import { NavLink, useLocation } from "react-router-dom";
-import { Typography } from "@mui/material";
-import Box from "@mui/material/Box";
+import {
+  AppBar,
+  Box,
+  List,
+  CssBaseline,
+  Drawer,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+
+import MenuItems from "./MenuItems";
+import { useStateValue } from "../../contexts/Context";
 
 import briefcase from "../../assets/sidebar/briefcase.svg";
 import drop from "../../assets/sidebar/drop.svg";
@@ -17,8 +23,16 @@ import drop from "../../assets/sidebar/drop.svg";
 const drawerWidth = 225;
 
 const SideBar = () => {
+  const { mobileSideBarNav, updateMobileSideBarNav } = useStateValue();
   const location = useLocation();
+  const theme = useTheme();
+
   const pathname = location.pathname;
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const handleDrawerToggle = () => {
+    updateMobileSideBarNav(!mobileSideBarNav);
+  };
 
   return (
     <Box sx={{ backgroundColor: "white" }}>
@@ -28,6 +42,12 @@ const SideBar = () => {
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       ></AppBar>
       <Drawer
+        open={mobileSideBarNav ? true : false}
+        variant={isMobile ? "temporary" : "permanent"}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true,
+        }}
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -36,9 +56,7 @@ const SideBar = () => {
             boxSizing: "border-box",
           },
         }}
-        variant="permanent"
         anchor="left"
-        className="scrollableY"
       >
         <List sx={{ mt: 8 }}>
           <Box my={1.5}>
@@ -55,7 +73,7 @@ const SideBar = () => {
                   }}
                   sx={{ color: "text.primary" }}
                 />
-                  <img src={drop} alt={"dropDown"} />
+                <img src={drop} alt={"dropDown"} />
               </ListItemButton>
             </ListItem>
           </Box>
@@ -81,6 +99,7 @@ const SideBar = () => {
                 component={NavLink}
                 to={item.path}
                 sx={{ color: "#39CDCC", py: "2px" }}
+                onClick={handleDrawerToggle}
               >
                 <ListItemButton selected={pathname.includes(item.path)}>
                   <ListItemIcon sx={{ minWidth: "35px" }}>
