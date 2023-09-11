@@ -11,7 +11,7 @@ const DashboardLayout = () => {
         sx={{ display: "flex", height: "100vh" }}
       >
         <SideBar />
-        <Container fixed sx={{ pb:6, pt: 10, backgroundColor: "#213F7D0F", width: '100%',  height: "100vh",   overflow: "auto" }}>
+        <Container sx={{ pb:6, pt: 10, backgroundColor: "#213F7D0F", width: '100%',  height: "100vh",   overflow: "auto" }}>
         <Box sx={{ color: "text.primary", fontFamily: "Work Sans", p: 2 }}>
           <Outlet />
           </Box>

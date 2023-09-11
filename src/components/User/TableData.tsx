@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Box,
   Typography,
   IconButton,
   Paper,
@@ -11,13 +12,13 @@ import {
   TableContainer,
   TableRow,
 } from "@mui/material";
-import { format } from 'date-fns'
+import { format } from "date-fns";
 
 import TableDropDown from "./TableDropDown";
 import FilterListIcon from "@mui/icons-material/FilterList";
 
 const formatDate = (date: any) => {
-  return format(new Date(date), 'MMM dd, yyyy HH:mm aa')
+  return format(new Date(date), "MMM dd, yyyy HH:mm aa");
 };
 
 type Column = {
@@ -67,10 +68,10 @@ type Data = {
   createdAt: string;
   status: string;
   _id: string;
-  fullName: string
+  fullName: string;
   UserTier: number;
   balance: string;
-  bankDetails: any
+  bankDetails: any;
 };
 
 function createData(
@@ -85,9 +86,20 @@ function createData(
   UserTier: number,
   balance: string,
   bankDetails: any
-
 ): Data {
-  return { organizationName, userName, email, phone, createdAt, status, _id, fullName, UserTier, balance, bankDetails };
+  return {
+    organizationName,
+    userName,
+    email,
+    phone,
+    createdAt,
+    status,
+    _id,
+    fullName,
+    UserTier,
+    balance,
+    bankDetails,
+  };
 }
 
 const makeStyles = (status: string) => {
@@ -167,19 +179,30 @@ const TableData = (usersDataList: any) => {
                   key={column.id}
                   align="left"
                   sx={{
-                    fontSize: "12px",
-                    fontWeight: "600",
-                    color: "#545F7D",
                     p: 0,
                     pl: 1.5,
                     pt: 1,
                     borderBottom: "none",
                   }}
                 >
-                  {column.label}
-                  <IconButton>
-                    <FilterListIcon />
-                  </IconButton>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography
+                      color="secondary"
+                      fontWeight={600}
+                      fontSize={12}
+                      sx={{ whiteSpace: "nowrap" }}
+                    >
+                      {column.label}
+                    </Typography>
+                    <IconButton>
+                      <FilterListIcon />
+                    </IconButton>
+                  </Box>
                 </TableCell>
               ))}
               <TableCell
@@ -221,13 +244,19 @@ const TableData = (usersDataList: any) => {
                     </TableCell>
 
                     <TableCell sx={{ p: "12px" }}>
-                      <Typography fontWeight={400} sx={{ fontSize: "12px" }}>
+                      <Typography
+                        fontWeight={400}
+                        sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
+                      >
                         {row.phone}
                       </Typography>
                     </TableCell>
 
                     <TableCell sx={{ p: "12px" }}>
-                      <Typography fontWeight={400} sx={{ fontSize: "12px" }}>
+                      <Typography
+                        fontWeight={400}
+                        sx={{ fontSize: "12px", whiteSpace: "nowrap" }}
+                      >
                         {formatDate(row.createdAt)}
                       </Typography>
                     </TableCell>

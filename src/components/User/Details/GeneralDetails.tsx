@@ -37,7 +37,7 @@ const GeneralDetails = () => {
     };
 
     getData();
-  }, []);
+  }, [userID]);
 
   return loading ? (
     <Spinner />
@@ -54,7 +54,7 @@ const GeneralDetails = () => {
         </Typography>
         <Box component="div" sx={{}}>
           <Grid container spacing={2}>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   FULL NAME
@@ -68,7 +68,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   PHONE NUMBER
@@ -82,7 +82,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   EMAIL ADDRESS
@@ -96,7 +96,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   BVN
@@ -110,7 +110,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   GENDER
@@ -124,7 +124,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   MARITAL STATUS
@@ -138,7 +138,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   CHILDREN
@@ -152,7 +152,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   TYPE OF RESIDENCE
@@ -312,7 +312,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   FACEBOOK
@@ -326,7 +326,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   Instagram
@@ -357,7 +357,7 @@ const GeneralDetails = () => {
         </Typography>
         <Box component="div" sx={{}}>
           <Grid container spacing={2}>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   FULL NAME
@@ -371,7 +371,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   PHONE NUMBER
@@ -385,7 +385,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   RELATIONSHIP
@@ -399,7 +399,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   EMAIL ADDRESS
@@ -420,7 +420,7 @@ const GeneralDetails = () => {
 
         <Box component="div" sx={{}}>
           <Grid container spacing={2}>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   FULL NAME
@@ -434,7 +434,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   PHONE NUMBER
@@ -448,7 +448,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   RELATIONSHIP
@@ -462,7 +462,7 @@ const GeneralDetails = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid item sm={6} md={4} lg={2.4}>
+            <Grid item xs={6} sm={4} md={2.4}>
               <Box component="div" sx={{ mb: 1 }}>
                 <Typography component="h1" sx={{ fontSize: "12px", mb: 1 }}>
                   EMAIL ADDRESS

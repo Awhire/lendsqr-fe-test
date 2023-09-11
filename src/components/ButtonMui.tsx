@@ -11,8 +11,9 @@ const ButtonMui = ({ title, color, loading, onClick }: any) => {
         size="small"
         onClick={onClick}
         sx={{
-          p: "16px",
-          py: "8px",
+          p: {xs:"8px", sm:"16px"},
+          py: {xs:"4px", sm:"8px"},
+          pr: {xs:"12px"},
           borderWidth: "1.5px",
           borderRadius: "8px",
         }}

@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography, CardMedia, Grid } from "@mui/material";
 
 import userAvatar from "../../../assets/user/userAvatar.svg";
 import Ratings from "../../Ratings";
@@ -12,97 +12,118 @@ const UserInfo = () => {
     <Box
       sx={{
         backgroundColor: "text.white",
-        mt: 5,
         borderRadius: "4px",
+        textAlign: { xs: "center", sm: "left" },
       }}
     >
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          p: 3,
-          alignItems: "center",
-        }}
-      >
-        <Box sx={{ display: "flex" }}>
-          <img src={userAvatar} alt="userAvatar" />
-
+      <Grid container spacing={2} sx={{ px: 3, pb: 2 }}>
+        <Grid item xs={12} sm={6} md={4} lg={4}>
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              pl: 3,
+              justifyContent: { xs: "center", md: 'space-between' },
+              height: "100%",
+            }}
+          >
+            <Box sx={{ display: "flex" }}>
+              <CardMedia
+                component="img"
+                image={userAvatar}
+                alt="userAvatar"
+                sx={{
+                  width: {
+                    xs: "70px",
+                    md: "80px",
+                    lg: "100px",
+                    objectFit: "contain",
+                  },
+                }}
+              />
+
+              <Box pl={3} sx={{}}>
+                <Typography
+                  component="h1"
+                  fontWeight={500}
+                  sx={{ color: "text.secondary", fontSize: "18px", mb: 1 }}
+                >
+                  {state.fullName}
+                </Typography>
+                <Typography
+                  component="p"
+                  textAlign='left'
+                  sx={{ color: "text.primary", fontSize: "12px" }}
+                >
+                  {state.userName}
+                </Typography>
+              </Box>
+            </Box>
+            <Divider
+              orientation="vertical"
+              sx={{ ml:3, display: { xs: "none", sm: "block" } }}
+            />
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3} lg={3}>
+        <Divider
+              orientation="horizontal"
+              sx={{ my:1.5, display: { xs: "block", sm: "none" } }}
+              
+            />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: { xs: "center", md: 'space-between' },
+              height: "100%",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                fontWeight={500}
+                sx={{ fontSize: "14px", color: "text.secondary", mb: 1 }}
+              >
+                User's Tier
+              </Typography>
+              <Ratings value={state.UserTier} />
+            </Box>
+            <Divider
+              orientation="vertical"
+              sx={{ mr:3, display: { xs: "none", md: "block" } }}
+            />
+          </Box>
+        </Grid>
+
+        <Grid item xs={12} md={4} lg={4}>
+        <Divider
+              orientation="horizontal"
+              sx={{ my:1.5, display: { xs: "block", sm: "none" } }}
+              
+            />
+          <Box
+            sx={{
+              color: "text.secondary",
+              textAlign: { xs: "center", md: "left" },
             }}
           >
             <Typography
-              component="h1"
-              fontWeight={500}
-              sx={{ color: "text.secondary", fontSize: "18px", mb: 1 }}
-            >
-              {state.fullName}
-            </Typography>
-            <Typography
               component="p"
-              sx={{ color: "text.primary", fontSize: "12px" }}
+              fontWeight={500}
+              sx={{ fontSize: "20px", mb: 1 }}
             >
-              {state.userName}
+              {state.balance}
+            </Typography>
+            <Typography component="p" sx={{ fontSize: "12px" }}>
+              {state.bankDetails.accountNumber} / {state.bankDetails.bankName}
             </Typography>
           </Box>
-        </Box>
-
-        <Divider
-          orientation="vertical"
-          flexItem
-          sx={{ height: "80px", ml: 5 }}
-        />
-
-        <Box
-          component="div"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            spaceY: 2,
-          }}
-        >
-          <Typography
-            fontWeight={500}
-            sx={{ fontSize: "14px", color: "text.primary", mb: 1 }}
-          >
-            User's Tier
-          </Typography>
-          <Ratings value={state.UserTier} />
-        </Box>
-
-        <Divider
-          orientation="vertical"
-          flexItem
-          sx={{ height: "80px", ml: 5 }}
-        />
-
-        <Box
-          sx={{
-            color: "text.secondary",
-            pl: 5,
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          <Typography
-            component="p"
-            fontWeight={500}
-            sx={{ fontSize: "20px", mb: 1 }}
-          >
-            {" "}
-            {state.balance}{" "}
-          </Typography>
-          <Typography component="p" sx={{ fontSize: "12px" }}>
-            {state.bankDetails.accountNumber} / {state.bankDetails.bankName}
-          </Typography>
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
 
       <UserDetailsNav />
     </Box>

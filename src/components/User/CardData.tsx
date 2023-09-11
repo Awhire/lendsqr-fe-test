@@ -1,17 +1,35 @@
-import { useState, useEffect } from "react";
 import users from "../../assets/users.svg";
 import activeUsersIcon from "../../assets/active.svg";
 import userLoan from "../../assets/usersLoan.svg";
 import UserSaving from "../../assets/userSavings.svg";
 import { Typography, Grid, CardContent, Card } from "@mui/material";
 
-const CardData = (usersDataList: any) => {
-  const data = usersDataList.usersDataList;
+const CardData = ({ usersDataList }: any) => {
+  const data = usersDataList;
 
-  const [usersLength, setUserSLength] = useState(0);
-  const [activeUsers, setActiveUsers] = useState(0);
-  const [usersWithLoan, setUsersWithLoan] = useState(0);
-  const [usersWithSavings, setUsersWithSavings] = useState(0);
+  //get total list of users
+  const usersLength = data.length;
+
+  // filter active user using status key
+  const activeUsersFilter = data.filter(
+    (user: { status: string }) => user.status === "Active"
+  );
+
+  const activeUsers = activeUsersFilter.length;
+
+  // filter users with loan using isLoan key
+  const usersWithLoanFilter = data.filter(
+    (user: { isLoan: boolean }) => user.isLoan
+  );
+
+  const usersWithLoan = usersWithLoanFilter.length;
+
+  // filter users with savings using isSaving key
+  const usersWithSavingFilter = data.filter(
+    (user: { isSaving: boolean }) => user.isSaving
+  );
+
+  const usersWithSavings = usersWithSavingFilter.length;
 
   const cardValue = [
     {
@@ -36,33 +54,15 @@ const CardData = (usersDataList: any) => {
     },
   ];
 
-  useEffect(() => {
-    setUserSLength(data.length);
-
-    const activeUsersFilter = data.filter(
-      (user: { status: string }) => user.status === "Active"
-    );
-
-    setActiveUsers(activeUsersFilter.length);
-
-    const usersWithLoanFilter = data.filter(
-      (user: { isLoan: any }) => user.isLoan
-    );
-
-    setUsersWithLoan(usersWithLoanFilter.length);
-
-    const usersWithSavingFilter = data.filter(
-      (user: { isSaving: any }) => user.isSaving
-    );
-
-    setUsersWithSavings(usersWithSavingFilter.length);
-  }, [data]);
 
   return (
     <Grid container spacing={3}>
       {cardValue.map((card, index) => (
         <Grid key={index} item xs={6} md={3}>
-          <Card className="card-shadow" sx={{ maxWidth: 240, pl: "10px" }}>
+          <Card
+            className="card-shadow"
+            sx={{ maxWidth: 240, pl: "10px", height: "100%" }}
+          >
             <CardContent>
               <img src={card.avartar} alt="" />
               <Typography

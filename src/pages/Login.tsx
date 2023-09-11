@@ -76,7 +76,7 @@ const Login = () => {
     if (isLoggedIn) {
       navigate("/user");
     }
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <Box>

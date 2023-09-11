@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +29,7 @@ const UserDetails = () => {
   const [blackListLoading, setBlackListLoading] = useState(false);
 
   const activate = async () => {
+    if(!activateLoading){
     try {
       setActivateLoading(true);
       const response = await api.activateUser(state._id);
@@ -45,9 +46,11 @@ const UserDetails = () => {
         toast.error("Something went wrong, please try again");
       }
     }
+  }
   };
 
   const blacklist = async () => {
+    if(!blackListLoading){
     try {
       setBlackListLoading(true);
       const response = await api.blaclListUser(state._id);
@@ -64,6 +67,7 @@ const UserDetails = () => {
         toast.error("Something went wrong, please try again");
       }
     }
+    }
   };
 
   const BackToDashboard = () => {
@@ -78,6 +82,7 @@ const UserDetails = () => {
           gap: 2,
           alignItems: "center",
           cursor: "pointer",
+          mb: 2
         }}
         onClick={BackToDashboard}
       >
@@ -90,13 +95,14 @@ const UserDetails = () => {
       <Box
         component="div"
         sx={{
-          display: "flex",
+          display:{sm: "flex"}, 
           gap: 4,
           justifyContent: "space-between",
           alignItems: "center",
+          mb: 8
         }}
       >
-        <Typography fontWeight={600} sx={{ mt: 2, fontSize: "20px" }}>
+        <Typography color='secondary' fontWeight={600} sx={{  fontSize: "20px" }}>
           Users Details
         </Typography>
         <Box
@@ -106,6 +112,7 @@ const UserDetails = () => {
             gap: 4,
             justifyContent: "space-between",
             alignItems: "center",
+            mt:{xs:1.2, sm:0}
           }}
         >
           <ButtonMui
