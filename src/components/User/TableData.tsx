@@ -15,7 +15,7 @@ import {
 import { format } from "date-fns";
 
 import TableDropDown from "./TableDropDown";
-import FilterListIcon from "@mui/icons-material/FilterList";
+import TableHeaderDropDown from "./TableHeaderDropDown";
 
 const formatDate = (date: any) => {
   return format(new Date(date), "MMM dd, yyyy HH:mm aa");
@@ -135,13 +135,14 @@ const makeStyles = (status: string) => {
   }
 };
 
-const TableData = (usersDataList: any) => {
-  const data = usersDataList.usersDataList;
+const TableData = ({ usersDataList }: any) => {
+  const data = usersDataList;
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [dataToDisplay, setDataToDisplay] = useState(data);
 
-  const rows = data.map((item: any) =>
+  const rows = dataToDisplay.map((item: any) =>
     createData(
       item.organizationName,
       item.userName,
@@ -166,6 +167,49 @@ const TableData = (usersDataList: any) => {
   ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const handleFilter = (value: any) => {
+    console.log(value);
+
+    if (value.button === "reset") {
+      // Reset the table data by restoring it to its original state
+      setDataToDisplay(data);
+    }
+
+    if (value.button === "filter") {
+      if (value.filterBy === "organizationName") {
+        const filter = dataToDisplay.filter((item: any) => {
+          return item.organizationName.includes(value.filterText);
+        });
+        setDataToDisplay(filter);
+      } else if (value.filterBy === "userName") {
+        const filter = dataToDisplay.filter((item: any) => {
+          return item.userName.includes(value.filterText);
+        });
+        setDataToDisplay(filter);
+      } else if (value.filterBy === "email") {
+        const filter = dataToDisplay.filter((item: any) => {
+          return item.email.includes(value.filterText);
+        });
+        setDataToDisplay(filter);
+      } else if (value.filterBy === "phone") {
+        const filter = dataToDisplay.filter((item: any) => {
+          return item.phone === Number(value.filterText);
+        });
+        setDataToDisplay(filter);
+      } else if (value.filterBy === "createdAt") {
+        const filter = dataToDisplay.filter((item: any) => {
+          return item.createdAt.includes(value.filterText);
+        });
+        setDataToDisplay(filter);
+      } else {
+        const filter = data.filter((item: any) => {
+          return item.status.includes(value.filterText);
+        });
+        setDataToDisplay(filter);
+      }
+    }
   };
 
   return (
@@ -199,9 +243,10 @@ const TableData = (usersDataList: any) => {
                     >
                       {column.label}
                     </Typography>
-                    <IconButton>
-                      <FilterListIcon />
-                    </IconButton>
+                    <TableHeaderDropDown
+                      headerNameProps={column.id}
+                      handleFilterProps={handleFilter}
+                    />
                   </Box>
                 </TableCell>
               ))}

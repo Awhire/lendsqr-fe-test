@@ -85,10 +85,9 @@ const Login = () => {
         <Grid
           item
           xs={false}
-          sm={false}
           md={6}
           className="illustrator-bg-shadow"
-          sx={{ pt: "40px" }}
+          sx={{ pt: "40px", display: {xs:"none", sm: "none", md: "block"} }}
         >
           <Box component="div" sx={{ width: "170px", ml: "80px" }}>
             <CardMedia
@@ -121,17 +120,26 @@ const Login = () => {
         <Grid
           item
           xs={12}
-          sm={6}
           md={6}
           component={Paper}
           elevation={0}
           square
-          sx={{ px: "80px" }}
+          sx={{ px: {xs:"0px", sm:"80px", md:"40px", lg:"80px"} }}
         >
+          <Box component="div" sx={{ width: "100px",  mt: 4, ml: 4, }}>
+            <CardMedia
+              component="img"
+              width="20"
+              image={lendsqrLogo}
+              alt="lendsqrLogo"
+              sx={{display: {md:'none'}}}
+            />
+          </Box>
           <Box
             sx={{
               my: 8,
               mx: 4,
+             
             }}
           >
             <Typography
@@ -140,7 +148,7 @@ const Login = () => {
               color="secondary"
               fontWeight={600}
               fontSize={40}
-              mt={10}
+              mt={4}
               sx={{ fontFamily: "AvenirNext", mb: "10px", lineHeight: "55px" }}
             >
               Welcome!
