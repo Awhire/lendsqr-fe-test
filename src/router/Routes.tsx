@@ -16,10 +16,10 @@ import Loans from "../pages/Loans";
 
 
 //layouts
-import RootLayout from "../layouts/RootLayout";
-import ProtectedLayout from "../layouts/ProtectedLayout";
-import DashboardLayout from "../layouts/DashboardLayout";
-import NestedLayout from "../layouts/NestedLayout";
+import RootLayout from "../components/Layouts/RootLayout";
+import ProtectedLayout from "../components/Layouts/ProtectedLayout";
+import DashboardLayout from "../components/Layouts/DashboardLayout";
+import NestedLayout from "../components/Layouts/NestedLayout";
 
 
 const router = createBrowserRouter(
@@ -29,6 +29,7 @@ const router = createBrowserRouter(
 
       {/* Proteted layout for login routes */}
       <Route element={<ProtectedLayout />}>
+        
         {/* dashboard layout for views with sidebar and topbar */}
         <Route element={<DashboardLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
