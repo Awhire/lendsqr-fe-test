@@ -21,6 +21,7 @@ import ProtectedLayout from "../layouts/ProtectedLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
 import NestedLayout from "../layouts/NestedLayout";
 
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
@@ -44,12 +45,18 @@ const router = createBrowserRouter(
 
       {/* 404 Not found */}
       <Route path="*" element={<NotFound />} />
+
     </Route>
   )
 );
 
 const Routes = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+    
+      <RouterProvider router={router} />;
+    </>
+  )
 };
 
 export default Routes;

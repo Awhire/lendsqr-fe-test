@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Box,
   Typography,
-  IconButton,
   Paper,
   Table,
   TableBody,
@@ -213,6 +212,8 @@ const TableData = ({ usersDataList }: any) => {
     }
   };
 
+
+
   return (
     <Paper className="card-shadow" sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 500, pl: 2 }}>
@@ -266,7 +267,12 @@ const TableData = ({ usersDataList }: any) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {/* check if dataToDisplay has data */}
+          {dataToDisplay.length === 0 ? (
+          <TableRow>
+              <TableCell colSpan={6}>No Records Found</TableCell>
+            </TableRow> ) : (
+            rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row: any, index: number) => {
                 return (
@@ -321,7 +327,7 @@ const TableData = ({ usersDataList }: any) => {
                     </TableCell>
                   </TableRow>
                 );
-              })}
+              }))}
           </TableBody>
         </Table>
       </TableContainer>

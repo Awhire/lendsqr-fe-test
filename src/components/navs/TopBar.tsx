@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Typography,
   Toolbar,
   CssBaseline,
   AppBar,
   Box,
-  Grid,
   Avatar,
   Paper,
   InputBase,
@@ -40,16 +39,20 @@ const styles = (theme: any) => ({
 
 const TopBar = () => {
   const navigate = useNavigate();
-  const theme = useTheme();
   const { mobileSideBarNav, updateMobileSideBarNav } = useStateValue();
+  const theme = useTheme();
+  const classes = styles(theme);
 
-  const [profileImg, setProfileImg] = useState("");
-  const [userFullName, setUserFullName] = useState("");
-  const [userFirstName, setUserFirstName] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const classes = styles(theme);
   const user = localStorage.getItem("user");
+
+  if (user) {
+    const userObj = JSON.parse(user);
+    var profileImg = userObj.profilePicUrl;
+    var fullName = userObj.fullName;
+    var userFirstName = fullName.split(" ")[0];
+  }
 
   const handleMenuOpen = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -137,17 +140,6 @@ const TopBar = () => {
     </Box>
   );
 
-  useEffect(() => {
-    if (user !== null) {
-      const userObj = JSON.parse(user);
-      const profileImg = userObj.profilePicUrl;
-      const fullName = userObj.fullName;
-      setProfileImg(profileImg);
-      setUserFullName(fullName);
-      setUserFirstName(fullName.split(" ")[0]);
-    }
-  }, [user]);
-
   function stringAvatar(name: string) {
     const value = name ? name : " ";
     return {
@@ -179,9 +171,12 @@ const TopBar = () => {
               width: "100%",
             }}
           >
-            <Box component="div" sx={{ mt: 1, display: "flex", alignItems: "center"}}>
+            <Box
+              component="div"
+              sx={{ mt: 1, display: "flex", alignItems: "center" }}
+            >
               <IconButton
-                color="inherit"
+                color="primary"
                 aria-label="open drawer"
                 edge="start"
                 onClick={handleDrawerToggle}
@@ -198,43 +193,43 @@ const TopBar = () => {
             </Box>
 
             <Box>
-            <Paper
-                  component="form"
-                  elevation={0}
+              <Paper
+                component="form"
+                elevation={0}
+                sx={{
+                  p: "2px 4px",
+                  display: { xs: "none", md: "flex" },
+                  alignItems: "center",
+                  width: 400,
+                  height: "40px",
+                  borderRadius: "8px",
+                  border: "1px solid ",
+                  borderColor: "text.gray",
+                }}
+              >
+                <InputBase
+                  sx={{ ml: 1, flex: 1, fontSize: "14px" }}
+                  placeholder="Search for anything"
+                  inputProps={{ "aria-label": "Search for anything" }}
+                />
+                <IconButton
+                  type="button"
                   sx={{
-                    p: "2px 4px",
-                    display: { xs: "none", md: "flex" },
-                    alignItems: "center",
-                    width: 400,
-                    height: "40px",
-                    borderRadius: "8px",
-                    border: "1px solid ",
-                    borderColor: "text.gray",
+                    px: 2,
+                    mr: "-5px",
+                    borderRadius: "0",
+                    borderBottomRightRadius: "8px",
+                    borderTopRightRadius: "8px",
+                    color: "text.white",
                   }}
+                  aria-label="search"
+                  edge="end"
+                  style={{ backgroundColor: "#39CDCC" }}
                 >
-                  <InputBase
-                    sx={{ ml: 1, flex: 1, fontSize: "14px" }}
-                    placeholder="Search for anything"
-                    inputProps={{ "aria-label": "Search for anything" }}
-                  />
-                  <IconButton
-                    type="button"
-                    sx={{
-                      px: 2,
-                      mr: "-5px",
-                      borderRadius: "0",
-                      borderBottomRightRadius: "8px",
-                      borderTopRightRadius: "8px",
-                      color: "text.white",
-                    }}
-                    aria-label="search"
-                    edge="end"
-                    style={{ backgroundColor: "#39CDCC" }}
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                </Paper>
-                </Box>
+                  <SearchIcon />
+                </IconButton>
+              </Paper>
+            </Box>
 
             <Box component="div">
               <Box
@@ -246,8 +241,6 @@ const TopBar = () => {
                   alignItems: "center",
                 }}
               >
-                
-
                 <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
                   <IconButton sx={{ display: { sm: "none", xs: "none" } }}>
                     <Typography
@@ -279,7 +272,7 @@ const TopBar = () => {
                             height: 32,
                             bgcolor: "primary.main",
                           }}
-                          {...stringAvatar(userFullName)}
+                          {...stringAvatar(fullName)}
                         />
                       )}
                     </Box>
