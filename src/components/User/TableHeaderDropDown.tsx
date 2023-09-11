@@ -68,6 +68,7 @@ const TableHeaderDropDown = ({ headerNameProps, handleFilterProps }: any) => {
 
     const text = searchParameter[selectedHeaderName];
 
+    // object data send to parent component to filter table
     const dataToSend = {
       filterBy: selectedHeaderName,
       filterText: text,

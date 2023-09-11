@@ -177,6 +177,7 @@ const TableData = ({ usersDataList }: any) => {
       setDataToDisplay(data);
     }
 
+    // check if button click is filter and filter by filterText
     if (value.button === "filter") {
       if (value.filterBy === "organizationName") {
         const filter = dataToDisplay.filter((item: any) => {
