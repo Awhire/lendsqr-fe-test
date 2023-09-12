@@ -80,14 +80,18 @@ const Login = () => {
 
   return (
     <Box>
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main">
         <CssBaseline />
         <Grid
           item
           xs={false}
           md={6}
           className="illustrator-bg-shadow"
-          sx={{ pt: "40px", display: {xs:"none", sm: "none", md: "block"} }}
+          sx={{
+            pt: "40px",
+            height: "100vh",
+            display: { xs: "none", sm: "none", md: "block" },
+          }}
         >
           <Box component="div" sx={{ width: "170px", ml: "80px" }}>
             <CardMedia
@@ -112,7 +116,7 @@ const Login = () => {
               component="img"
               image={illustration}
               alt="illustration"
-              sx={{ width: "93%" }}
+              sx={{ width: "90%" }}
             />
           </Box>
         </Grid>
@@ -124,22 +128,22 @@ const Login = () => {
           component={Paper}
           elevation={0}
           square
-          sx={{ px: {xs:"0px", sm:"80px", md:"40px", lg:"80px"} }}
+          sx={{ px: { xs: "0px", sm: "80px", md: "40px", lg: "80px" } }}
         >
-          <Box component="div" sx={{ width: "100px",  mt: 4, ml: 4, }}>
+          <Box component="div" sx={{ width: "100px", mt: 4, ml: 4 }}>
             <CardMedia
               component="img"
               width="20"
               image={lendsqrLogo}
               alt="lendsqrLogo"
-              sx={{display: {md:'none'}}}
+              sx={{ display: { md: "none" } }}
             />
           </Box>
           <Box
             sx={{
-              my: 8,
+              mt: 8,
+              mb: 4,
               mx: 4,
-             
             }}
           >
             <Typography

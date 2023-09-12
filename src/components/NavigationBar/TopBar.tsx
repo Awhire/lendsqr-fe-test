@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 import { toast } from "react-toastify";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -28,20 +27,10 @@ import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
-const styles = (theme: any) => ({
-  logoRes: {
-    w: 10,
-    [theme.breakpoints.down("sm")]: {
-      w: 5,
-    },
-  },
-});
 
 const TopBar = () => {
   const navigate = useNavigate();
   const { mobileSideBarNav, updateMobileSideBarNav } = useStateValue();
-  const theme = useTheme();
-  const classes = styles(theme);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -152,7 +141,7 @@ const TopBar = () => {
       <CssBaseline />
       <AppBar
         position="fixed"
-        className="elevation2"
+        className="elevation1"
         sx={{
           zIndex: (theme) => theme.zIndex.drawer + 1,
           backgroundColor: "text.white",

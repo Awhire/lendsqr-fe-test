@@ -4,9 +4,7 @@ import { StateProvider } from "./contexts/Context";
 
 import theme from "./theme";
 import Routes from "./router/Routes";
-
 import "react-toastify/dist/ReactToastify.css";
-import "./App.scss";
 
 function App() {
   return (
