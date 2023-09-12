@@ -4,7 +4,7 @@ const baseURL = process.env.REACT_APP_API_BASE_URL;
 const token = localStorage.getItem("token");
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-export default {
+const endpoints = {
   // singin endpoing
   signIn: (payload: any) => {
     const method = "post";
@@ -44,3 +44,6 @@ export default {
     return axios({ method, url });
   },
 };
+
+
+export default endpoints;

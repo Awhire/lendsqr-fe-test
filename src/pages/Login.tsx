@@ -176,9 +176,11 @@ const Login = () => {
               sx={{ mt: 1 }}
             >
               <TextField
-                size="small"
                 fullWidth
+                size="small"
                 label="Email"
+                id="email"
+        data-testid="email"
                 InputLabelProps={{
                   style: {
                     fontSize: 14,
@@ -201,14 +203,15 @@ const Login = () => {
                 fullWidth
                 size="small"
                 name="password"
+                id="password"
                 label="Password"
+        data-testid="password"
                 InputLabelProps={{
                   style: {
                     fontSize: 14,
                   },
                 }}
                 type={showPassword ? "text" : "password"}
-                id="password"
                 value={formik.values.password}
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -256,6 +259,7 @@ const Login = () => {
                 disableElevation
                 disabled={!(formik.isValid && formik.dirty) || loading}
                 sx={{ mt: 3, mb: 2, p: 1.5 }}
+        data-testid="submit-button"
               >
                 {loading ? (
                   <CircularProgress sx={{ color: "white" }} size={20} />

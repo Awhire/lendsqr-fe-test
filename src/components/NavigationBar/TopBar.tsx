@@ -10,12 +10,10 @@ import {
   InputBase,
   IconButton,
   Popover,
-  Divider,
   CardMedia,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+
 import SearchIcon from "@mui/icons-material/Search";
 
 import { useStateValue } from "../../contexts/Context";
@@ -23,13 +21,11 @@ import { useStateValue } from "../../contexts/Context";
 import lendsqr from "../../assets/lendsqr-logo.svg";
 import notis from "../../assets/notis.svg";
 import dropdown from "../../assets/dropdown.svg";
-import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
-import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+
+import TopBarDropdown from "./TopBarDropdown";
 
 
 const TopBar = () => {
-  const navigate = useNavigate();
   const { mobileSideBarNav, updateMobileSideBarNav } = useStateValue();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -54,80 +50,9 @@ const TopBar = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
-  const logout = () => {
-    localStorage.clear();
-    navigate("/");
-    handleMenuClose();
-    toast.success("Successfully logged out!");
-  };
 
-  const menuContent = (
-    <Box sx={{ py: 1 }}>
-      <Box
-        sx={{
-          display: "flex",
-          gap: 1,
-          pl: 2,
-          pr: 6,
-          py: 0.5,
-          mb: 0.5,
-          "&:hover": {
-            backgroundColor: "primary.light",
-            cursor: "pointer",
-          },
-        }}
-        onClick={handleMenuClose}
-      >
-        <Person2OutlinedIcon fontSize="small" sx={{ color: "primary.main" }} />
-        <Typography fontWeight={400} fontSize="14px">
-          Profile
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          gap: 1,
-          pl: 2,
-          pr: 6,
-          py: 0.5,
-          mb: 0.5,
-          "&:hover": {
-            backgroundColor: "primary.light",
-            cursor: "pointer",
-          },
-        }}
-        onClick={handleMenuClose}
-      >
-        <SettingsSuggestOutlinedIcon
-          fontSize="small"
-          sx={{ color: "primary.main" }}
-        />
-        <Typography fontWeight={400} fontSize="14px">
-          Settings
-        </Typography>
-      </Box>
-      <Divider light sx={{ my: 0.5 }} />
-      <Box
-        sx={{
-          display: "flex",
-          gap: 1,
-          pl: 2,
-          pr: 6,
-          py: 0.5,
-          "&:hover": {
-            backgroundColor: "primary.light",
-            cursor: "pointer",
-          },
-        }}
-        onClick={logout}
-      >
-        <LogoutOutlinedIcon fontSize="small" sx={{ color: "primary.main" }} />
-        <Typography fontWeight={400} fontSize="14px">
-          Log out
-        </Typography>
-      </Box>
-    </Box>
-  );
+
+  
 
   function stringAvatar(name: string) {
     const value = name ? name : " ";
@@ -293,7 +218,7 @@ const TopBar = () => {
                       horizontal: "right",
                     }}
                   >
-                    {menuContent}
+                    <TopBarDropdown closeMenu={handleMenuClose}  />
                   </Popover>
                 </Box>
               </Box>
