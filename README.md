@@ -4,6 +4,15 @@ The lendsqr-fe-test project is a frontend application built using React 18. It s
 
 
 ## Scripts
+#### This are the command for the script:
+
+<b>npm run start</b>: Start the application in the development environment.
+
+<b>npm run build</b>: Build the application for the production environment.
+
+<b>npm run test</b>: Test the application (Unit Testing).
+
+
 #### To run a script, you can use the following command:
 
 <b>npm run start</b>: Start the application in the development environment.
@@ -20,3 +29,7 @@ git clone https://github.com/Awhire/lendsqr-fe-test.git
 
 
 npm install
+
+
+## URL
+https://awhire-godspower-lendsqr-fe-test.netlify.app/
