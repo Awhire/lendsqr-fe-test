@@ -169,8 +169,6 @@ const TableData = ({ usersDataList }: any) => {
   };
 
   const handleFilter = (value: any) => {
-    console.log(value);
-
     if (value.button === "reset") {
       // Reset the table data by restoring it to its original state
       setDataToDisplay(data);
