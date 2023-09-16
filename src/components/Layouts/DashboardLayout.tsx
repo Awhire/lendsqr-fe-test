@@ -1,21 +1,19 @@
 import { Outlet } from "react-router-dom";
 import SideBar from "../NavigationBar/SideBar";
 import TopBar from "../NavigationBar/TopBar";
-import {Box, Container} from "@mui/material";
+import { Box } from "@mui/material";
 
 const DashboardLayout = () => {
   return (
     <>
       <TopBar />
       <Box
-        sx={{ display: "flex", height: "100vh" }}
+        sx={{ display: "flex" }}
       >
         <SideBar />
-        <Container sx={{ pb:6, pt: 10, backgroundColor: "#213F7D0F", width: '100%',  height: "100vh",   overflow: "auto" }}>
-        <Box sx={{ color: "text.primary", fontFamily: "Work Sans", p: 2 }}>
-          <Outlet />
+          <Box component='div' sx={{p:5, pb:6, pt: 12, width: '100%',  backgroundColor: "#213F7D0F", color: "text.primary", fontFamily: "Work Sans"}}>
+            <Outlet />
           </Box>
-        </Container>
       </Box>
     </>
   );

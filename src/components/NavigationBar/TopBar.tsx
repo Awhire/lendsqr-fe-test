@@ -156,7 +156,7 @@ const TopBar = () => {
                 }}
               >
                 <Box sx={{ display: "flex", gap: 4, alignItems: "center" }}>
-                  <IconButton sx={{ display: { sm: "none", xs: "none" } }}>
+                  <IconButton sx={{ display: { xs: "none", sm: "block" } }}>
                     <Typography
                       className="prevent-select"
                       color={"secondary"}

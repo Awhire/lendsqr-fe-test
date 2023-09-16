@@ -54,6 +54,11 @@
   font-display: swap;
 }
 
+
+body {
+  line-height: 0 !important;
+}
+
 .prevent-select {
   -moz-user-select: none; /* firefox */
   -webkit-user-select: none; /* Safari */
